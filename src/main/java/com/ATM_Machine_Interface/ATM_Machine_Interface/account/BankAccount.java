@@ -1,6 +1,7 @@
 package com.ATM_Machine_Interface.ATM_Machine_Interface.account;
 
 import com.ATM_Machine_Interface.ATM_Machine_Interface.transaction.Transaction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +36,7 @@ public class BankAccount {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    @JsonIgnore
     @OneToMany(
             mappedBy = "account",
             cascade = CascadeType.ALL,
