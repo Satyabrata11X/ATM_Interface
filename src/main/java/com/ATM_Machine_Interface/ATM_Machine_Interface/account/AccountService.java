@@ -1,5 +1,6 @@
 package com.ATM_Machine_Interface.ATM_Machine_Interface.account;
 
+import com.ATM_Machine_Interface.ATM_Machine_Interface.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,7 +46,8 @@ public class AccountService {
         BankAccount account = accountRepository
                 .findByAccountNumber(accountNumber)
                 .orElseThrow(() ->
-                        new RuntimeException("Account not found"));
+                        new ResourceNotFoundException(
+                                "Account not found with number: " + accountNumber));
 
         return account.getBalance();
     }
