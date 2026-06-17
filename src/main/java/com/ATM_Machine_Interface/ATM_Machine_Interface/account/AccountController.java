@@ -1,6 +1,6 @@
 package com.ATM_Machine_Interface.ATM_Machine_Interface.account;
 
-
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +8,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/accounts")
-
 public class AccountController {
 
     private final AccountService accountService;
@@ -20,7 +19,13 @@ public class AccountController {
     // Create Account
     @PostMapping
     public ResponseEntity<BankAccount> createAccount(
-            @RequestBody BankAccount account) {
+            @Valid @RequestBody CreateAccountRequest request) {
+
+        BankAccount account = new BankAccount();
+
+        account.setAccountNumber(request.getAccountNumber());
+        account.setAccountHolderName(request.getAccountHolderName());
+        account.setBalance(request.getBalance());
 
         return ResponseEntity.ok(
                 accountService.createAccount(account)

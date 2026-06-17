@@ -1,5 +1,6 @@
 package com.ATM_Machine_Interface.ATM_Machine_Interface.transaction;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class DepositRequest {
 
+    @NotBlank(message = "Account number is required")
     private String accountNumber;
 
     @Positive(message = "Amount must be greater than zero")
