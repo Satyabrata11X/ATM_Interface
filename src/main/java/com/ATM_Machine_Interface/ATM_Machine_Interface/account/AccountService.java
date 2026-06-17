@@ -1,5 +1,6 @@
 package com.ATM_Machine_Interface.ATM_Machine_Interface.account;
 
+import com.ATM_Machine_Interface.ATM_Machine_Interface.common.exception.AccountAlreadyExistsException;
 import com.ATM_Machine_Interface.ATM_Machine_Interface.common.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,16 @@ public class AccountService {
 
     // Create Account
     public BankAccount createAccount(BankAccount account) {
+
+        accountRepository.findByAccountNumber(
+                        account.getAccountNumber())
+                .ifPresent(existing -> {
+                    throw new AccountAlreadyExistsException(
+                            "Account number "
+                                    + account.getAccountNumber()
+                                    + " already exists");
+                });
+
         return accountRepository.save(account);
     }
 
