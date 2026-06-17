@@ -45,4 +45,25 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public LoginResponse loginUser(LoginRequest request) {
+
+        User user = userRepository
+                .findByUsername(request.getUsername())
+                .orElseThrow(() ->
+                        new RuntimeException("Invalid username or password"));
+
+        boolean passwordMatches =
+                passwordEncoder.matches(
+                        request.getPassword(),
+                        user.getPassword());
+
+        if (!passwordMatches) {
+            throw new RuntimeException(
+                    "Invalid username or password");
+        }
+
+        return new LoginResponse(
+                "Login Successful");
+    }
 }
