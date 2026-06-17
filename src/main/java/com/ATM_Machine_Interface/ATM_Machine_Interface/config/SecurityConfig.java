@@ -35,10 +35,14 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
-                                "/auth/**"
-                        ).permitAll()
-
-                        .anyRequest().authenticated()
+                                "/auth/**",
+                                "/login-page",
+                                "/css/**",
+                                "/js/**"
+                        )
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated()
                 )
 
                 .addFilterBefore(

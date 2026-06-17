@@ -2,6 +2,7 @@ package com.ATM_Machine_Interface.ATM_Machine_Interface.user;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,4 +32,6 @@ public class AuthController {
                 userService.loginUser(request)
         );
     }
+
+
 }
